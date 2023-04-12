@@ -1,6 +1,6 @@
 <div>
 
-
+    <h5>Create</h5>
     <form wire:submit.prevent='store'>
         <div class="form-group">
             <div class="row">
