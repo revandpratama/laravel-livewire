@@ -19,12 +19,12 @@
     <hr>
 
     <div class="row mb-3">
-        <div class="col">
-            
-            <select wire:model='paginate' name="" id="" class="form-control form-control-sm w-auto">
+        <div class="col d-flex wrap">
+            <span class="small form-label w-auto align-self-lg-end">Show Entry : </span>
+            <select wire:model='paginate' wire:change='gotoPageOne()' name="" id="" class="form-control form-control-sm w-auto">
                 <option value="5">5</option>
                 <option value="10">10</option> 
-                <option value="15">15</option> 
+                <option value="15">15</option>  
             </select>
                 
         </div>
@@ -43,9 +43,12 @@
             </tr>
         </thead>
         <tbody>
+            @php
+                $skipped = ($contacts->currentPage() * $contacts->perPage()) - $contacts->perPage();
+            @endphp
             @foreach ($contacts as $contact)
                 <tr>
-                    <th scope="row">{{ $loop->iteration }}</th>
+                    <th scope="row">{{ $loop->iteration + $skipped }}</th>
                     <td>{{ $contact->name }}</td>
                     <td>{{ $contact->phone }}</td>
                     <td class="d-flex justify-content-evenly">

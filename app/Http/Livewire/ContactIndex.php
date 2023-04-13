@@ -15,7 +15,10 @@ class ContactIndex extends Component
 
     public $paginate = 5;
 
-    protected $queryString = ['search'];
+    protected $queryString = [
+        'search' => ['except'=> ''],
+        'page'
+    ];
 
     public $listeners = [
         'contactStored'=> 'handleStored', //or name this with assoc array => 'handleStored'. And change the method name
@@ -34,6 +37,11 @@ class ContactIndex extends Component
                 Contact::latest()->paginate($this->paginate) : 
                 Contact::latest()->where('name', 'like', '%' . $this->search . '%')->paginate($this->paginate)
         ]);
+    }
+
+    public function gotoPageOne() 
+    {
+        $this->resetPage();
     }
 
     public function getContact($contactId)
