@@ -3,16 +3,16 @@
 
     <table class="table mt-3">
         <tr>
-            <th>Status</th>
-            <th>Name</th>
-            <th>Action</th>
+            
         </tr>
 
         @foreach ($todos as $todo)
             <tr>
-                <td></td>
-                <td>{{ $todo->name }}</td>
-                <td>delete</td>
+                <td style="width: 2em"><input wire:change='checkedTodo({{ $todo->id }})' type="checkbox" name="" id="" {{ $todo->status == 'checked' ? 'checked' : ''}}></td>
+                <td class="{{ ($todo->status == 'unchecked') ? '' : 'text-decoration-line-through' }}">{{ $todo->name }}</td>
+                <td>
+                    <button wire:click='deleteTodo({{ $todo->id }})' class="btn btn-danger btn-sm">Trash</button>
+                </td>
             </tr>
         @endforeach
     </table>

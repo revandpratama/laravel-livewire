@@ -22,6 +22,23 @@ class TodoIndex extends Component
 
     public function todoAdded() 
     {
-        
+
     }
+
+    public function deleteTodo($id)
+    {
+        Todo::destroy($id);
+    }
+
+    public function checkedTodo($id)
+    {
+        $todo = Todo::find($id);
+        if($todo->status == 'unchecked'){
+            $todo->status = 'checked';
+            $todo->save();
+        }else{
+            $todo->status = 'unchecked';
+            $todo->save();
+        }
+    } 
 }
